@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云南弘凯文旅发展有限公司</title>
+    <style>
+        /* =========================================================
+           云南弘凯文旅 — Brand Design System
+           Inspired by ridebeep.com — full-bleed, image-led, restrained
+           ========================================================= */
+        :root {
+            --color-primary: #C17A3A;
+            --color-primary-light: #D4944F;
+            --color-primary-dark: #9E6129;
+            --color-primary-lightest: #F5E0C3;
+            --color-bg-primary: #FFFFFF;
+            --color-bg-secondary: #FAF7F3;
+            --color-bg-tertiary: #F2EDE6;
+            --color-bg-inverse: #1A1714;
+            --color-bg-inverse-secondary: #26221E;
+            --color-text-primary: #1A1714;
+            --color-text-secondary: #5C554D;
+            --color-text-tertiary: #8A8278;
+            --color-text-inverse: #FFFFFF;
+            --color-text-inverse-secondary: #B8AFA5;
+            --color-border: #E2DAD0;
+            --color-border-inverse: #3A3530;
+            --font-title: 'PingFang SC', 'Microsoft YaHei', '微软雅黑', sans-serif;
+            --font-body: 'PingFang SC', 'Microsoft YaHei', '微软雅黑', sans-serif;
+            --max-width: 1280px;
+            --max-width-narrow: 860px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text-primary);
+            background: var(--color-bg-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.6;
+        }
+
+        /* ── Typography ── */
+        h1, h2, h3 { font-family: var(--font-title); }
+
+        /* ── Header ── */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.35s ease, box-shadow 0.35s ease;
+        }
+        .header.scrolled {
+            background-color: rgba(26, 23, 20, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+        }
+        .header-inner {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .header-logo {
+            font-family: var(--font-title);
+            font-size: 22px;
+            font-weight: 700;
+            color: #FFFFFF;
+            text-decoration: none;
+            letter-spacing: 0.02em;
+            white-space: nowrap;
+        }
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .header-nav a {
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 400;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: color 0.2s, background-color 0.2s;
+        }
+        .header-nav a:hover,
+        .header-nav a.active { color: #FFFFFF; }
+        .header-nav a.active { background: rgba(255,255,255,0.08); }
+        .header-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 22px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #FFFFFF;
+            background: var(--color-primary);
+            border: none;
+            border-radius: 24px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s;
+            white-space: nowrap;
+        }
+        .header-cta:hover { background: var(--color-primary-dark); }
+
+        .header-mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #FFFFFF;
+            cursor: pointer;
+            padding: 8px;
+        }
+        .header-mobile-toggle svg { width: 24px; height: 24px; }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 72px;
+            left: 0;
+            right: 0;
+            background: rgba(26, 23, 20, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 16px 24px 24px;
+            flex-direction: column;
+            gap: 2px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .mobile-nav.open { display: flex; }
+        .mobile-nav a {
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            font-size: 16px;
+            padding: 12px 8px;
+            transition: color 0.2s;
+        }
+        .mobile-nav a:hover,
+        .mobile-nav a.active { color: #FFFFFF; }
+        .mobile-nav .mobile-cta {
+            margin-top: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 12px 24px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #FFFFFF;
+            background: var(--color-primary);
+            border-radius: 24px;
+            text-decoration: none;
+            width: fit-content;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 40%;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(26, 23, 20, 0.45) 0%,
+                rgba(26, 23, 20, 0.55) 40%,
+                rgba(26, 23, 20, 0.70) 100%
+            );
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 240px 32px 0;
+            max-width: 720px;
+        }
+        .hero-brand {
+            font-family: var(--font-title);
+            font-size: clamp(32px, 6vw, 64px);
+            font-weight: 700;
+            color: #FFFFFF;
+            line-height: 1.1;
+            letter-spacing: 0.03em;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(24px);
+            animation: fadeUp 0.8s 0.2s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+        }
+        .hero-tagline {
+            font-size: clamp(16px, 2.2vw, 22px);
+            font-weight: 300;
+            color: rgba(255,255,255,0.85);
+            line-height: 1.6;
+            margin-bottom: 36px;
+            opacity: 0;
+            transform: translateY(24px);
+            animation: fadeUp 0.8s 0.4s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+        }
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(24px);
+            animation: fadeUp 0.8s 0.6s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+        }
+        .hero-cta-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #FFFFFF;
+            background: var(--color-primary);
+            border: none;
+            border-radius: 28px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.25s, transform 0.25s;
+        }
+        .hero-cta-primary:hover { background: var(--color-primary-dark); transform: translateY(-1px); }
+        .hero-cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            font-size: 15px;
+            font-weight: 400;
+            color: #FFFFFF;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 28px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: border-color 0.25s, background-color 0.25s;
+        }
+        .hero-cta-secondary:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.06); }
+        .hero-scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            opacity: 0;
+            animation: fadeUp 0.8s 1s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+        }
+        .hero-scroll-indicator span {
+            display: block;
+            width: 24px;
+            height: 40px;
+            border: 2px solid rgba(255,255,255,0.4);
+            border-radius: 14px;
+            position: relative;
+        }
+        .hero-scroll-indicator span::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 2px;
+            animation: scrollDot 2s ease-in-out infinite;
+        }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes scrollDot {
+            0%, 100% { top: 8px; opacity: 1; }
+            50% { top: 22px; opacity: 0.3; }
+        }
+
+        /* ── Sections ── */
+        .section { padding: 100px 32px; }
+        .section-dark { background: var(--color-bg-inverse); color: var(--color-text-inverse); }
+        .section-warm { background: var(--color-bg-secondary); }
+        .section-inner { max-width: var(--max-width); margin: 0 auto; }
+        .section-inner-narrow { max-width: var(--max-width-narrow); margin: 0 auto; }
+
+        .section-label {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            margin-bottom: 16px;
+        }
+        .section-heading {
+            font-family: var(--font-title);
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 600;
+            line-height: 1.15;
+            letter-spacing: -0.01em;
+            margin-bottom: 20px;
+        }
+        .section-subheading {
+            font-size: clamp(16px, 1.5vw, 19px);
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            max-width: 600px;
+        }
+        .section-dark .section-subheading { color: var(--color-text-inverse-secondary); }
+
+        /* ── Featured Locations (alternating image+text) ── */
+        .location-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 520px;
+            align-items: stretch;
+        }
+        .location-row.reverse { direction: rtl; }
+        .location-row.reverse .location-text { direction: ltr; }
+        .location-image {
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+        }
+        .location-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.32, 0.72, 0, 1);
+        }
+        .location-image:hover img { transform: scale(1.03); }
+        .location-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 64px;
+        }
+        .location-text .section-label { margin-bottom: 12px; }
+        .location-text h2 {
+            font-family: var(--font-title);
+            font-size: clamp(26px, 3.5vw, 42px);
+            font-weight: 600;
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+        .location-text p {
+            font-size: 16px;
+            line-height: 1.75;
+            color: var(--color-text-secondary);
+            max-width: 480px;
+            margin-bottom: 28px;
+        }
+        .link-arrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: gap 0.25s, color 0.25s;
+        }
+        .link-arrow:hover { gap: 14px; color: var(--color-primary-dark); }
+        .link-arrow svg { width: 16px; height: 16px; transition: transform 0.25s; }
+        .link-arrow:hover svg { transform: translateX(4px); }
+
+        /* ── Services ── */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+            margin-top: 64px;
+        }
+        .service-item {
+            padding: 0;
+        }
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-primary-lightest);
+            border-radius: 12px;
+            margin-bottom: 24px;
+            color: var(--color-primary);
+        }
+        .service-icon svg { width: 24px; height: 24px; }
+        .service-item h3 {
+            font-family: var(--font-title);
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .service-item p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--color-text-secondary);
+        }
+
+        /* ── Stats ── */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin-top: 56px;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 32px 16px;
+        }
+        .stat-number {
+            font-family: var(--font-title);
+            font-size: clamp(32px, 4vw, 56px);
+            font-weight: 700;
+            color: var(--color-primary);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .stat-label {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        /* ── About ── */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 7fr 5fr;
+            gap: 64px;
+            align-items: center;
+            margin-top: 48px;
+        }
+        .about-text p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--color-text-secondary);
+            margin-bottom: 20px;
+        }
+        .about-image {
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+        }
+
+        /* ── Contact CTA ── */
+        .contact-cta {
+            text-align: center;
+            padding: 100px 32px;
+            background: var(--color-bg-inverse);
+        }
+        .contact-cta .section-heading { color: var(--color-text-inverse); }
+        .contact-cta .section-subheading { color: var(--color-text-inverse-secondary); margin: 0 auto 36px; }
+        .contact-cta .hero-cta-primary { font-size: 16px; padding: 16px 36px; }
+
+        /* ── Footer ── */
+        .footer {
+            background: var(--color-bg-inverse);
+            color: var(--color-text-inverse-secondary);
+            padding: 80px 32px 40px;
+        }
+        .footer-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+        .footer-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 48px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid var(--color-border-inverse);
+            margin-bottom: 48px;
+        }
+        .footer-brand {
+            font-family: var(--font-title);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--color-text-inverse);
+        }
+        .footer-desc {
+            font-size: 14px;
+            line-height: 1.7;
+            max-width: 420px;
+        }
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid var(--color-border-inverse);
+            margin-bottom: 32px;
+        }
+        .footer-col h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-text-inverse);
+            margin-bottom: 16px;
+            letter-spacing: 0.04em;
+        }
+        .footer-col a {
+            display: block;
+            font-size: 14px;
+            color: var(--color-text-inverse-secondary);
+            text-decoration: none;
+            padding: 6px 0;
+            transition: color 0.2s;
+        }
+        .footer-col a:hover { color: var(--color-text-inverse); }
+        .footer-col .contact-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 14px;
+            padding: 6px 0;
+        }
+        .footer-col .contact-row svg { width: 16px; height: 16px; margin-top: 2px; flex-shrink: 0; }
+        .footer-bottom {
+            text-align: center;
+            font-size: 13px;
+        }
+
+        /* ── Scroll Reveal ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.7s cubic-bezier(0.32, 0.72, 0, 1),
+                        transform 0.7s cubic-bezier(0.32, 0.72, 0, 1);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { transition: none; opacity: 1; transform: none; }
+            .hero-brand, .hero-tagline, .hero-actions, .hero-scroll-indicator { animation: none; opacity: 1; transform: none; }
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 1024px) {
+            .location-row {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+            .location-row.reverse { direction: ltr; }
+            .location-image { min-height: 320px; max-height: 420px; }
+            .location-text { padding: 48px 32px; }
+            .services-grid { grid-template-columns: 1fr; gap: 40px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .about-image { order: -1; }
+        }
+
+        @media (max-width: 768px) {
+            .header-nav { display: none; }
+            .header-cta { display: none; }
+            .header-mobile-toggle { display: flex; }
+            .header-inner { padding: 0 20px; }
+            .section { padding: 64px 20px; }
+            .hero-content { padding: 220px 20px 0; }
+            .location-text { padding: 40px 20px; }
+            .location-image { min-height: 280px; max-height: 360px; }
+            .footer-top { flex-direction: column; gap: 24px; }
+            .footer-links { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+            .contact-cta { padding: 64px 20px; }
+        }
+
+        @media (max-width: 480px) {
+            .footer-links { grid-template-columns: 1fr; gap: 24px; }
+            .hero-actions { flex-direction: column; }
+            .hero-cta-primary, .hero-cta-secondary { width: 100%; justify-content: center; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header" id="header">
+    <div class="header-inner">
+        <a href="#" class="header-logo">弘凯文旅</a>
+        <nav class="header-nav" id="desktop-nav">
+            <a href="#home" class="active">首页</a>
+            <a href="#scenic">运营景区</a>
+            <a href="#services">核心业务</a>
+            <a href="#about">关于我们</a>
+        </nav>
+        <a href="#contact" class="header-cta">
+            联系我们
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </a>
+        <button class="header-mobile-toggle" id="mobile-toggle" aria-label="Menu">
+            <svg id="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+    </div>
+    <div class="mobile-nav" id="mobile-nav">
+        <a href="#home" class="active">首页</a>
+        <a href="#scenic">运营景区</a>
+        <a href="#services">核心业务</a>
+        <a href="#about">关于我们</a>
+        <a href="#contact" class="mobile-cta">联系我们</a>
+    </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+    <div class="hero-bg">
+        <img src="assets/indexbanner.png" alt="滇池全景">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1 class="hero-brand">弘凯文旅</h1>
+        <p class="hero-tagline">智慧文旅 · 匠心运营 — 让每一次旅程都值得铭记</p>
+        <div class="hero-actions">
+            <a href="#scenic" class="hero-cta-primary">
+                探索景区
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            </a>
+            <a href="#contact" class="hero-cta-secondary">合作咨询</a>
+        </div>
+    </div>
+    <div class="hero-scroll-indicator">
+        <span></span>
+    </div>
+</section>
+
+<!-- ===== 运营景区 (Featured Locations) ===== -->
+<section class="section" id="scenic">
+    <div class="section-inner">
+        <div class="reveal" style="text-align: center; margin-bottom: 64px;">
+            <span class="section-label">运营景区</span>
+            <h2 class="section-heading">滇池之畔 · 山水之间</h2>
+            <p class="section-subheading" style="margin: 0 auto;">精心运营昆明滇池畔核心景区，为游客打造高品质文旅体验</p>
+        </div>
+    </div>
+
+    <!-- 海埂公园 -->
+    <div class="location-row reveal">
+        <div class="location-image">
+            <img src="assets/haigeng-park.jpg" alt="海埂公园湖光山色">
+        </div>
+        <div class="location-text">
+            <span class="section-label">都市绿洲</span>
+            <h2>海埂公园</h2>
+            <p>滇池之畔的都市绿洲，湖光山色尽收眼底。漫步林荫大道，感受春城四季如春的温柔与诗意。</p>
+            <a href="#scenic" class="link-arrow">
+                了解更多
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- 海洪湿地公园 -->
+    <div class="location-row reverse reveal">
+        <div class="location-image">
+            <img src="assets/haihong-wetland.jpg" alt="海洪湿地公园">
+        </div>
+        <div class="location-text">
+            <span class="section-label">生态湿地</span>
+            <h2>海洪湿地公园</h2>
+            <p>荷花映日，白鹭齐飞。漫步湿地栈道，聆听自然的声音，体验滇池生态湿地的纯净与生机。</p>
+            <a href="#scenic" class="link-arrow">
+                了解更多
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- 滇池绿道 -->
+    <div class="location-row reveal">
+        <div class="location-image">
+            <img src="assets/sightseeing-cart.jpg" alt="滇池绿道智能观光车">
+        </div>
+        <div class="location-text">
+            <span class="section-label">智慧出行</span>
+            <h2>滇池绿道</h2>
+            <p>智能观光车伴您畅游最美环湖路线。骑行滇池畔，享受湖风拂面的惬意，体验智慧文旅的便捷与舒适。</p>
+            <a href="#scenic" class="link-arrow">
+                了解更多
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- 南岸沙滩 -->
+    <div class="location-row reverse reveal">
+        <div class="location-image">
+            <img src="assets/nanan-beach.jpg" alt="南岸沙滩日落">
+        </div>
+        <div class="location-text">
+            <span class="section-label">滨湖度假</span>
+            <h2>南岸沙滩</h2>
+            <p>昆明人的海滨度假胜地。夕阳西下时分，金色余晖洒满湖面，尽享阳光与波光的浪漫邂逅。</p>
+            <a href="#scenic" class="link-arrow">
+                了解更多
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 核心业务 (Core Services) ===== -->
+<section class="section section-warm" id="services">
+    <div class="section-inner">
+        <div class="reveal" style="text-align: center; margin-bottom: 16px;">
+            <span class="section-label">核心业务</span>
+            <h2 class="section-heading">以智慧科技为引擎<br>赋能文旅产业全链条</h2>
+        </div>
+        <div class="services-grid">
+            <div class="service-item reveal reveal-delay-1">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                </div>
+                <h3>智能观光车投资运营</h3>
+                <p>投资建设新型智能观光车系统，提供景区内便捷交通服务，从车辆定制、智能调度到运营维护的一站式解决方案。</p>
+            </div>
+            <div class="service-item reveal reveal-delay-2">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+                </div>
+                <h3>景区全案策划运营</h3>
+                <p>从规划策划到运营管理，提供景区全生命周期服务。深入挖掘在地文化资源，打造有特色、有温度、有活力的文旅目的地。</p>
+            </div>
+            <div class="service-item reveal reveal-delay-3">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                </div>
+                <h3>智慧景区打造</h3>
+                <p>运用物联网、大数据、人工智能技术，构建智慧管理平台。覆盖智慧票务、智慧导览、智慧安防、智慧停车等全模块。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 关于我们 (About) ===== -->
+<section class="section" id="about">
+    <div class="section-inner">
+        <div class="about-grid reveal">
+            <div class="about-text">
+                <span class="section-label">关于我们</span>
+                <h2 class="section-heading" style="font-size: clamp(28px, 3.5vw, 42px);">深耕云南文旅<br>以科技赋能美好旅程</h2>
+                <p>云南弘凯文旅发展有限公司成立于2023年12月，坐落于美丽的春城昆明滇池国家旅游度假区。公司为吉林弘凯专用车制造有限公司子公司，实缴资金一亿元。</p>
+                <p>公司依托集团在专用车制造领域的技术优势和全产业链资源，致力于将智能化、数字化技术与文旅产业深度融合，为景区提供从规划、建设到运营的一站式解决方案。目前已成功为昆明市滇池绿道、海埂公园、海洪湿地公园、南岸沙滩等知名景区提供优质服务。</p>
+                <a href="#contact" class="link-arrow">
+                    了解更多
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+            <div class="about-image">
+                <img src="assets/company-office.jpg" alt="弘凯文旅办公室">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 企业数据 (Stats) ===== -->
+<section class="section section-dark">
+    <div class="section-inner">
+        <div class="reveal" style="text-align: center; margin-bottom: 24px;">
+            <span class="section-label" style="color: var(--color-primary-light);">企业数据</span>
+        </div>
+        <div class="stats-grid reveal">
+            <div class="stat-item">
+                <div class="stat-number">1亿</div>
+                <div class="stat-label" style="color: var(--color-text-inverse-secondary);">实缴注册资本</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">4+</div>
+                <div class="stat-label" style="color: var(--color-text-inverse-secondary);">运营景区数量</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100+</div>
+                <div class="stat-label" style="color: var(--color-text-inverse-secondary);">智能观光车辆</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">2023</div>
+                <div class="stat-label" style="color: var(--color-text-inverse-secondary);">公司成立年份</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== 联系我们 (Contact CTA) ===== -->
+<section class="contact-cta" id="contact">
+    <div class="section-inner-narrow reveal">
+        <span class="section-label" style="color: var(--color-primary-light);">联系我们</span>
+        <h2 class="section-heading">携手弘凯文旅<br>共创美好文旅未来</h2>
+        <p class="section-subheading">如您对我们的文旅项目或合作机会感兴趣，欢迎随时联系我们。我们期待与各地景区、文旅机构携手合作，共同推动文旅产业数字化升级。</p>
+        <a href="mailto:info@hongkaiwenlv.com" class="hero-cta-primary">
+            发送合作咨询
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </a>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="footer-brand">弘凯文旅</div>
+            <p class="footer-desc">云南弘凯文旅发展有限公司，专注于景区投资建设与运营管理，打造智慧景区特色产品，为游客提供便捷、智能的旅游体验。</p>
+        </div>
+        <div class="footer-links">
+            <div class="footer-col">
+                <h4>业务范围</h4>
+                <a href="#services">智能观光车</a>
+                <a href="#services">景区运营</a>
+                <a href="#services">智慧景区</a>
+                <a href="#services">文旅策划</a>
+            </div>
+            <div class="footer-col">
+                <h4>运营景区</h4>
+                <a href="#scenic">海埂公园</a>
+                <a href="#scenic">海洪湿地公园</a>
+                <a href="#scenic">南岸沙滩</a>
+                <a href="#scenic">滇池绿道</a>
+            </div>
+            <div class="footer-col">
+                <h4>联系我们</h4>
+                <div class="contact-row">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <span>云南省昆明市西山区万达广场南塔55A08</span>
+                </div>
+                <div class="contact-row">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <span>0871-XXXX-XXXX</span>
+                </div>
+                <div class="contact-row">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    <span>info@hongkaiwenlv.com</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">&copy; 2026 云南弘凯文旅发展有限公司 版权所有</div>
+    </div>
+</footer>
+
+<script>
+    (function() {
+        // ── Header scroll effect ──
+        const header = document.getElementById('header');
+        const hero = document.querySelector('.hero');
+
+        function updateHeader() {
+            const heroBottom = hero.getBoundingClientRect().bottom;
+            if (heroBottom < 72) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }
+
+        window.addEventListener('scroll', updateHeader, { passive: true });
+        updateHeader();
+
+        // ── Mobile menu toggle ──
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileNav = document.getElementById('mobile-nav');
+        const menuIcon = document.getElementById('menu-icon');
+
+        let menuOpen = false;
+
+        mobileToggle.addEventListener('click', () => {
+            menuOpen = !menuOpen;
+            mobileNav.classList.toggle('open', menuOpen);
+            if (menuOpen) {
+                menuIcon.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>';
+            } else {
+                menuIcon.innerHTML = '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
+            }
+        });
+
+        // Close mobile menu on link click
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuOpen = false;
+                mobileNav.classList.remove('open');
+                menuIcon.innerHTML = '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>';
+            });
+        });
+
+        // ── Active nav link on scroll ──
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('#desktop-nav a, #mobile-nav a:not(.mobile-cta)');
+
+        function updateActiveNav() {
+            let current = 'home';
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 120) {
+                    current = section.id;
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav, { passive: true });
+
+        // ── Scroll reveal ──
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // ── Smooth scroll for anchor links ──
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    })();
+</script>
+
+</body>
+</html>
